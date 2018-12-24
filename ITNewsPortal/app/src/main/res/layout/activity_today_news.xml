@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kr.sboo.android.itnewsportal.RecentNewsActivity">
+    tools:context="kr.sboo.android.itnewsportal.TodayNewsActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recent_news_container"
+        android:id="@+id/today_news_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"

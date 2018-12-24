@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import kr.sboo.android.itnewsportal.model.News;
 
 /**
  * Created by lgpc on 2018-12-23.
@@ -16,6 +20,7 @@ import butterknife.ButterKnife;
 
 public class NewsAdapter extends RecyclerView.Adapter {
     private Context mContext;
+    private List<News> mNewsList;
 
     public NewsAdapter(Context context) {
         this.mContext = context;
@@ -30,22 +35,31 @@ public class NewsAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+        ((NewsHolder)holder).bind(mNewsList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mNewsList != null ? mNewsList.size() : 0;
+    }
+
+    public void setNewsList(List<News> newsList){
+        mNewsList = newsList;
     }
 
     class NewsHolder extends RecyclerView.ViewHolder{
-        private TextView mTitle;
-        private TextView mWriter;
-        private TextView mDate;
+         @BindView(R.id.title) TextView mTitle;
+         @BindView(R.id.writer) TextView mWriter;
+         @BindView(R.id.date) TextView mDate;
 
         public NewsHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(itemView);
+            ButterKnife.bind(this, itemView);        }
+
+        public void bind(News news){
+            mTitle.setText(news.getTitle());
+            mWriter.setText(news.getAuthor());
+            mDate.setText(news.getPublishedDate());
         }
     }
 }
