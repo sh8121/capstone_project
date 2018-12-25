@@ -17,4 +17,14 @@ public class News {
     private String previewContent;
     private String uri;
     private Provider provider;
+
+    public String getSubInfo(){
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(provider.getName());
+        buffer.append(" | ");
+        buffer.append(author);
+        buffer.append("   ");
+        buffer.append(publishedDate);
+        return buffer.toString();
+    }
 }

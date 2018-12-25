@@ -18,7 +18,7 @@ import kr.sboo.android.itnewsportal.model.News;
  * Created by lgpc on 2018-12-23.
  */
 
-public class NewsAdapter extends RecyclerView.Adapter {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
     private Context mContext;
     private List<News> mNewsList;
 
@@ -28,14 +28,14 @@ public class NewsAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(mContext).inflate(R.layout.news_cell, parent, false);
-        return new NewsHolder(rootView);
+    public NewsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View newsView = LayoutInflater.from(mContext).inflate(R.layout.news_cell, parent, false);
+        return new NewsHolder(newsView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((NewsHolder)holder).bind(mNewsList.get(position));
+    public void onBindViewHolder(@NonNull NewsHolder holder, int position) {
+        holder.bind(mNewsList.get(position));
     }
 
     @Override
@@ -45,21 +45,20 @@ public class NewsAdapter extends RecyclerView.Adapter {
 
     public void setNewsList(List<News> newsList){
         mNewsList = newsList;
+        notifyDataSetChanged();
     }
 
     class NewsHolder extends RecyclerView.ViewHolder{
          @BindView(R.id.title) TextView mTitle;
-         @BindView(R.id.writer) TextView mWriter;
-         @BindView(R.id.date) TextView mDate;
+         @BindView(R.id.sub_info) TextView mSubInfo;
 
-        public NewsHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);        }
+        public NewsHolder(View newsView) {
+            super(newsView);
+            ButterKnife.bind(this, newsView);        }
 
         public void bind(News news){
             mTitle.setText(news.getTitle());
-            mWriter.setText(news.getAuthor());
-            mDate.setText(news.getPublishedDate());
+            mSubInfo.setText(news.getSubInfo());
         }
     }
 }

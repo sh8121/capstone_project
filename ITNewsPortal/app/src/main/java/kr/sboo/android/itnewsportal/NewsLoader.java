@@ -1,6 +1,7 @@
 package kr.sboo.android.itnewsportal;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
 
 import com.google.gson.Gson;
@@ -27,6 +28,7 @@ import lombok.Setter;
 public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
     private static final String API_URL = "https://www.swjang.com/api/feed";
+    private List<News> mNewsList;
 
     public NewsLoader(Context context) {
         super(context);
@@ -34,7 +36,10 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
     @Override
     protected void onStartLoading() {
-        forceLoad();
+        if(mNewsList != null)
+            deliverResult(mNewsList);
+        else
+            forceLoad();
     }
 
     @Override
@@ -69,6 +74,12 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
             catch (IOException ex){}
         }
 
+    }
+
+    @Override
+    public void deliverResult(@Nullable List<News> newsList) {
+        mNewsList = newsList;
+        super.deliverResult(newsList);
     }
 
     private List<News> convertToNewsList(String json){

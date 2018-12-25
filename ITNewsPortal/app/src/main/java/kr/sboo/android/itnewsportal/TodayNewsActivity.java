@@ -6,8 +6,11 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.LinearLayout;
 
 import java.util.List;
 
@@ -17,8 +20,9 @@ import kr.sboo.android.itnewsportal.model.News;
 
 public class TodayNewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
+    private static final int NEWS_LOADER_ID = 1000;
     @BindView(R.id.today_news_container) RecyclerView mTodayNewsContainer;
-    NewsAdapter mAdapter;
+    private NewsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,9 @@ public class TodayNewsActivity extends AppCompatActivity implements LoaderManage
         mAdapter = new NewsAdapter(this);
         mTodayNewsContainer.setAdapter(mAdapter);
         mTodayNewsContainer.setLayoutManager(new LinearLayoutManager(this));
-        getSupportLoaderManager().initLoader(0, null, this);
+        mTodayNewsContainer.setItemAnimator(new DefaultItemAnimator());
+        mTodayNewsContainer.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        getSupportLoaderManager().initLoader(NEWS_LOADER_ID, null, this);
     }
 
     @NonNull
@@ -40,12 +46,10 @@ public class TodayNewsActivity extends AppCompatActivity implements LoaderManage
     @Override
     public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
         mAdapter.setNewsList(data);
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<News>> loader) {
         mAdapter.setNewsList(null);
-        mAdapter.notifyDataSetChanged();
     }
 }
