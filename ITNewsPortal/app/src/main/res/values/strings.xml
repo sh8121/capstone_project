@@ -2,7 +2,9 @@
     <string name="app_name">ITNewsPortal</string>
 
     <!--Main-->
-    <string name="bt_go_to_today_news_title">Today\'s News</string>
-    <string name="bt_go_to_my_news_title">My Favorite News</string>
+    <string name="go_to_today_news_button_title">Today\'s News</string>
+    <string name="go_to_my_news_button_title">My Favorite News</string>
 
+    <!--NewsDetail-->
+    <string name="web_view_url_empty_alert_text">There is no news url</string>
 </resources>

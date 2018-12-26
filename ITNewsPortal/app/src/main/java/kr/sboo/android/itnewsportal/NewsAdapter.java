@@ -21,9 +21,11 @@ import kr.sboo.android.itnewsportal.model.News;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
     private Context mContext;
     private List<News> mNewsList;
+    private OnNewsClickListener mListener;
 
-    public NewsAdapter(Context context) {
+    public NewsAdapter(Context context, OnNewsClickListener listener) {
         this.mContext = context;
+        this.mListener = listener;
     }
 
     @NonNull
@@ -48,17 +50,29 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
         notifyDataSetChanged();
     }
 
-    class NewsHolder extends RecyclerView.ViewHolder{
+    interface OnNewsClickListener{
+        void onClick(News news);
+    }
+
+    class NewsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
          @BindView(R.id.title) TextView mTitle;
          @BindView(R.id.sub_info) TextView mSubInfo;
 
         public NewsHolder(View newsView) {
             super(newsView);
-            ButterKnife.bind(this, newsView);        }
+            ButterKnife.bind(this, newsView);
+            newsView.setOnClickListener(this);
+        }
 
         public void bind(News news){
             mTitle.setText(news.getTitle());
             mSubInfo.setText(news.getSubInfo());
+        }
+
+        @Override
+        public void onClick(View v) {
+            News news = mNewsList.get(getAdapterPosition());
+            mListener.onClick(news);
         }
     }
 }

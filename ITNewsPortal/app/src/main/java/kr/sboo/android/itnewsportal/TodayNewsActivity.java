@@ -1,5 +1,6 @@
 package kr.sboo.android.itnewsportal;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -10,7 +11,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
+
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import kr.sboo.android.itnewsportal.model.News;
 
-public class TodayNewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
+public class TodayNewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>, NewsAdapter.OnNewsClickListener {
 
     private static final int NEWS_LOADER_ID = 1000;
     @BindView(R.id.today_news_container) RecyclerView mTodayNewsContainer;
@@ -29,7 +31,7 @@ public class TodayNewsActivity extends AppCompatActivity implements LoaderManage
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_news);
         ButterKnife.bind(this);
-        mAdapter = new NewsAdapter(this);
+        mAdapter = new NewsAdapter(this, this);
         mTodayNewsContainer.setAdapter(mAdapter);
         mTodayNewsContainer.setLayoutManager(new LinearLayoutManager(this));
         mTodayNewsContainer.setItemAnimator(new DefaultItemAnimator());
@@ -51,5 +53,13 @@ public class TodayNewsActivity extends AppCompatActivity implements LoaderManage
     @Override
     public void onLoaderReset(@NonNull Loader<List<News>> loader) {
         mAdapter.setNewsList(null);
+    }
+
+    @Override
+    public void onClick(News news) {
+        Gson gson = new Gson();
+        Intent intent = new Intent(this, NewsDetailActivity.class);
+        intent.putExtra(NewsDetailActivity.NEWS_KEY, gson.toJson(news));
+        startActivity(intent);
     }
 }
