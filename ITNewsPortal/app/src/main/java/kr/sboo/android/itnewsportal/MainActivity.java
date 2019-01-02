@@ -10,7 +10,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-
     @BindView(R.id.go_to_today_news_button) Button mGoToTodayNewsButton;
     @BindView(R.id.go_to_my_news_button) Button mGoToMyNewsButton;
 
@@ -24,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, TodayNewsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mGoToMyNewsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyNewsActivity.class);
                 startActivity(intent);
             }
         });

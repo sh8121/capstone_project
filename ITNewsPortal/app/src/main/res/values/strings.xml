@@ -7,4 +7,6 @@
 
     <!--NewsDetail-->
     <string name="web_view_url_empty_alert_text">There is no news url</string>
+    <string name="news_url_save_alert_text">Saved Successfully</string>
+    <string name="news_url_already_exist_alert_text">This news is already saved</string>
 </resources>

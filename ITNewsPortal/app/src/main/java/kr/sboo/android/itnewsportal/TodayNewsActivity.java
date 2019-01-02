@@ -20,18 +20,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import kr.sboo.android.itnewsportal.model.News;
 
-public class TodayNewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>, NewsAdapter.OnNewsClickListener {
+public class TodayNewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>, NewsAdapterBase.OnNewsClickListener {
 
     private static final int NEWS_LOADER_ID = 1000;
     @BindView(R.id.today_news_container) RecyclerView mTodayNewsContainer;
-    private NewsAdapter mAdapter;
+    private TodaysNewsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_news);
         ButterKnife.bind(this);
-        mAdapter = new NewsAdapter(this, this);
+        mAdapter = new TodaysNewsAdapter(this, this);
         mTodayNewsContainer.setAdapter(mAdapter);
         mTodayNewsContainer.setLayoutManager(new LinearLayoutManager(this));
         mTodayNewsContainer.setItemAnimator(new DefaultItemAnimator());
@@ -56,7 +56,8 @@ public class TodayNewsActivity extends AppCompatActivity implements LoaderManage
     }
 
     @Override
-    public void onClick(News news) {
+    public void onClick(int position) {
+        News news = mAdapter.getNews(position);
         Gson gson = new Gson();
         Intent intent = new Intent(this, NewsDetailActivity.class);
         intent.putExtra(NewsDetailActivity.NEWS_KEY, gson.toJson(news));

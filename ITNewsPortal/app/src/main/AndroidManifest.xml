@@ -11,6 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name=".data.NewsProvider"
+            android:authorities="kr.sboo.android.itnewsportal.provider"
+            android:exported="true" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".TodayNewsActivity" />
-        <activity android:name=".NewsDetailActivity"></activity>
+        <activity android:name=".NewsDetailActivity" />
+        <activity android:name=".MyNewsActivity"></activity>
     </application>
 
 </manifest>

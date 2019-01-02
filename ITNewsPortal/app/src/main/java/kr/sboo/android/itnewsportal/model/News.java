@@ -1,5 +1,7 @@
 package kr.sboo.android.itnewsportal.model;
 
+import android.text.TextUtils;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +21,9 @@ public class News {
     private Provider provider;
 
     public String getSubInfo(){
+        if(TextUtils.isEmpty(author) || TextUtils.isEmpty(publishedDate) || provider == null){
+            return "";
+        }
         StringBuffer buffer = new StringBuffer();
         buffer.append(provider.getName());
         buffer.append(" | ");
