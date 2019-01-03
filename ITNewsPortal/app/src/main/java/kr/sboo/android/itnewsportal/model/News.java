@@ -21,15 +21,17 @@ public class News {
     private Provider provider;
 
     public String getSubInfo(){
-        if(TextUtils.isEmpty(author) || TextUtils.isEmpty(publishedDate) || provider == null){
-            return "";
-        }
         StringBuffer buffer = new StringBuffer();
-        buffer.append(provider.getName());
-        buffer.append(" | ");
-        buffer.append(author);
-        buffer.append("   ");
-        buffer.append(publishedDate);
+        if(provider != null && !TextUtils.isEmpty(provider.getName()))
+            buffer.append(provider.getName());
+        if(!TextUtils.isEmpty(author)){
+            buffer.append(" | ");
+            buffer.append(author);
+        }
+        if(!TextUtils.isEmpty(publishedDate)){
+            buffer.append("   ");
+            buffer.append(publishedDate);
+        }
         return buffer.toString();
     }
 }

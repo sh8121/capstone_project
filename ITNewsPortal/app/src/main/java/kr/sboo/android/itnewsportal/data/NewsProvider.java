@@ -16,6 +16,7 @@ public class NewsProvider extends ContentProvider {
     private static final int NEWS = 100;
     private static final int NEWS_WITH_ID = 101;
     private static final UriMatcher sUriMatcher = buildUriMatcher();
+    private static final int ID_INDEX_IN_PATH = 1;
 
     public static UriMatcher buildUriMatcher(){
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -48,7 +49,7 @@ public class NewsProvider extends ContentProvider {
                         sortOrder);
                 break;
             case NEWS_WITH_ID:
-                String id = uri.getPathSegments().get(1);
+                String id = uri.getPathSegments().get(ID_INDEX_IN_PATH);
                 cursor = db.query(NewsContract.NewsEntry.TABLE_NAME,
                         projection,
                         "_id=?",
@@ -98,7 +99,23 @@ public class NewsProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        final SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
+        int match = sUriMatcher.match(uri);
+        int rowCnt = -1;
+        switch (match){
+            case NEWS_WITH_ID:
+                String id = uri.getPathSegments().get(ID_INDEX_IN_PATH);
+                rowCnt = db.delete(NewsContract.NewsEntry.TABLE_NAME, "_id=?", new String[]{id});
+                if(rowCnt == 0){
+                    throw new SQLException("Failed to delete row into " + uri);
+                }
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown Uri: " + uri);
+        }
+
+        getContext().getContentResolver().notifyChange(NewsContract.NewsEntry.CONTENT_URI, null);
+        return rowCnt;
     }
 
     @Override

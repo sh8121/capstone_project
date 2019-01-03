@@ -26,6 +26,8 @@ public class NewsDetailActivity extends AppCompatActivity {
     @BindView(R.id.webview) WebView mWebView;
     @BindView(R.id.go_back_button) FloatingActionButton mGoBackButton;
     @BindView(R.id.save_button) FloatingActionButton mSaveButton;
+    @BindView(R.id.delete_button) FloatingActionButton mDeleteButton;
+    @BindView(R.id.edit_button) FloatingActionButton mEditButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +72,21 @@ public class NewsDetailActivity extends AppCompatActivity {
                         }
                     }
                 });
+                mSaveButton.setVisibility(View.VISIBLE);
             }
             else{
-                mSaveButton.setVisibility(View.GONE);
+                mDeleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = NewsContract.NewsEntry.CONTENT_URI.buildUpon().appendPath(String.valueOf(news.getId())).build();
+                        int rowCnt = getContentResolver().delete(uri, null, null);
+                        if(rowCnt > 0){
+                            Toast.makeText(NewsDetailActivity.this, getResources().getString(R.string.news_delete_alert_text), Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+                    }
+                });
+                mDeleteButton.setVisibility(View.VISIBLE);
             }
         }
         else{

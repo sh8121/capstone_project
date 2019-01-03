@@ -31,6 +31,13 @@ public class MyNewsAdapter extends NewsAdapterBase{
         return mCursor != null ? mCursor.getCount() : 0;
     }
 
+    public long getId(int position){
+        mCursor.moveToPosition(position);
+        final int columnIdIndex = mCursor.getColumnIndex(NewsContract.NewsEntry._ID);
+        final long id = mCursor.getLong(columnIdIndex);
+        return id;
+    }
+
     public String getNewsUri(int position){
         mCursor.moveToPosition(position);
         final int uriIndex = mCursor.getColumnIndex(NewsContract.NewsEntry.COLUMN_URI);

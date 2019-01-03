@@ -58,7 +58,9 @@ public class MyNewsActivity extends AppCompatActivity implements MyNewsAdapter.O
     @Override
     public void onClick(int position) {
         String newsUri = mAdapter.getNewsUri(position);
+        long id = mAdapter.getId(position);
         News news = new News();
+        news.setId(id);
         news.setUri(newsUri);
         Gson gson = new Gson();
         Intent intent = new Intent(this, NewsDetailActivity.class);
