@@ -5,9 +5,19 @@
     <string name="go_to_today_news_button_title">Today\'s News</string>
     <string name="go_to_my_news_button_title">My Favorite News</string>
 
+    <!--MyNews-->
+    <string-array name="news_order_std_array">
+        <item>DateDesc</item>
+        <item>DateAsc</item>
+        <item>TitleDesc</item>
+        <item>TitleAsc</item>
+    </string-array>
+
     <!--NewsDetail-->
     <string name="web_view_url_empty_alert_text">There is no news url</string>
     <string name="news_url_save_alert_text">Saved Successfully</string>
     <string name="news_url_already_exist_alert_text">This news is already saved</string>
     <string name="news_delete_alert_text">Deleted Successfully</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
