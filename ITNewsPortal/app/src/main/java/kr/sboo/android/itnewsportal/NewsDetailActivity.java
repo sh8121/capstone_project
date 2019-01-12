@@ -5,13 +5,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.CursorAdapter;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -21,7 +19,7 @@ import butterknife.ButterKnife;
 import kr.sboo.android.itnewsportal.data.NewsContract;
 import kr.sboo.android.itnewsportal.model.News;
 
-public class NewsDetailActivity extends AppCompatActivity {
+public class NewsDetailActivity extends TransitionActivityBase {
     public static final String NEWS_KEY = "NEWS";
     @BindView(R.id.webview) WebView mWebView;
     @BindView(R.id.go_back_button) FloatingActionButton mGoBackButton;

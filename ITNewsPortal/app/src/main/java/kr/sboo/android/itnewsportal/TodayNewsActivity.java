@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import kr.sboo.android.itnewsportal.model.News;
 
-public class TodayNewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>, NewsAdapterBase.OnNewsClickListener {
+public class TodayNewsActivity extends TransitionActivityBase implements LoaderManager.LoaderCallbacks<List<News>>, NewsAdapterBase.OnNewsClickListener {
 
     private static final int NEWS_LOADER_ID = 1000;
     @BindView(R.id.today_news_container) RecyclerView mTodayNewsContainer;

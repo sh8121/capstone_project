@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +23,7 @@ import butterknife.ButterKnife;
 import kr.sboo.android.itnewsportal.data.NewsContract;
 import kr.sboo.android.itnewsportal.model.News;
 
-public class MyNewsActivity extends AppCompatActivity implements MyNewsAdapter.OnNewsClickListener, LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemSelectedListener {
+public class MyNewsActivity extends TransitionActivityBase implements MyNewsAdapter.OnNewsClickListener, LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemSelectedListener {
 
     private static final int MY_NEWS_LOADER_ID = 1001;
 
