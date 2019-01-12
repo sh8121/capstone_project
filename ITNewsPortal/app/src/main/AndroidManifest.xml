@@ -43,12 +43,6 @@
             android:name=".RecentlyNewsService"
             android:exported="false" />
 
-        <service
-            android:name=".NewsFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
     </application>
 
 </manifest>
